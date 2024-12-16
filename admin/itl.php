@@ -138,7 +138,7 @@ include('./includes/topbar.php');
                                             <td>' . htmlspecialchars($row['employeeId']) . '</td>
                                             <td>' . htmlspecialchars($fullName) . '</td>
                                             <td>' . htmlspecialchars($row['designation_itl']) . '</td>
-                                           <td>' . htmlspecialchars(($designationLoadRelease[$row['designation_load_released']] == 0.0) ? 'Non-designated' : 'Designated') . '</td>
+                                            <td>' . '</td>
                                             <td></td>
                                             <td>' . (is_numeric($totalOverload) ? number_format($totalOverload, 2) : $totalOverload) . '</td>
                                         
