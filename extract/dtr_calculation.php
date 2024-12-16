@@ -59,8 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['excelFile'])) {
         $fileContent = file_get_contents($filePath);
 
         // Prepare SQL query
-        $sql = "INSERT INTO faculty_dtr (userId, week_1, week_2, week_3, week_4, week_5, weekly_total, overtime_earned, academic_year, academic_sem, academic_month, dtr_file, dtr_filename) 
-        VALUES (:employeeId, :week1, :week2, :week3, :week4, :week5, :total, :overtime, :academicYear, :academicSemester, :month, :file, :filename)";
+        $sql = "INSERT INTO faculty_dtr (userId, week_1, week_2, week_3, week_4, week_5,  academic_year, academic_sem, academic_month, dtr_file, dtr_filename) 
+        VALUES (:employeeId, :week1, :week2, :week3, :week4, :week5,  :academicYear, :academicSemester, :month, :file, :filename)";
         $stmt = $pdo->prepare($sql);
 
         // Initialize weekly sums and overtime
@@ -119,8 +119,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['excelFile'])) {
             ':week3' => $weeklySums[2],
             ':week4' => $weeklySums[3],
             ':week5' => $weeklySums[4],
-            ':total' => $totalSum,
-            ':overtime' => $totalOvertime,
             ':academicYear' => $academicYear,
             ':academicSemester' => $academicSemester,
             ':month' => $academicMonth,

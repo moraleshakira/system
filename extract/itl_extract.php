@@ -62,7 +62,14 @@ try {
                     $facultyCredit = $row[9] ?? null; // Assuming the value is in the 10th column
                 }
                 if (is_string($cell) && stripos($cell, 'DESIGNATION, LOAD RELEASED') !== false) {
-                    $designationLoadReleased = $row[9] ?? null; // Assuming the value is in the 10th column
+                    $designationLoadReleased = $row[9] ?? null;
+                
+                    if ($designationLoadReleased === '0.0') {
+                        $designation = 'Non-designated'; 
+                    } else {
+                        
+                        $designation = $designationLoadReleased;
+                    }
                 }
                 if (is_string($cell) && stripos($cell, 'Designation:') !== false) {
                     $designation_itl = $row[11] ?? null; // Assuming the value is in the 12th column
@@ -74,12 +81,13 @@ try {
         if ($facultyCredit !== null && $designationLoadReleased !== null) {
             // Insert extracted values and file into the database
             $stmt = $pdo->prepare("
-                INSERT INTO faculty_load (faculty_credit, designation_load_released, designation_itl, academic_year, academic_sem, userId, file, filename) 
-                VALUES (:facultyCredit, :designationLoadReleased, :designation_itl, :academicYear, :academicSemester, :employeeId, :file, :filename)
+                INSERT INTO faculty_load (faculty_credit, designation_load_released, designation, designation_itl, academic_year, academic_sem, userId, file, filename) 
+                VALUES (:facultyCredit, :designationLoadReleased, :designation_itl, :designation, :academicYear, :academicSemester, :employeeId, :file, :filename)
             ");
             $stmt->execute([
                 ':facultyCredit' => $facultyCredit,
                 ':designationLoadReleased' => $designationLoadReleased,
+                ':designation' => $designation,
                 ':designation_itl' => $designation_itl,
                 ':academicYear' => $academicYear,
                 ':academicSemester' => $academicSemester,

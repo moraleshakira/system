@@ -17,13 +17,13 @@ if (count($user_roles) === 1) {
             header("Location: ./admin/index.php");
             break;
         case 'Hr':
-            header("Location: ./hr/h_dash.php");
+            header("Location: ./hr/h-dashboard.php");
             break;
         case 'Staff':
-            header("Location: ./staff/s_dash.php");
+            header("Location: ./staff/s-dashboard.php");
             break;
         case 'Faculty':
-            header("Location: ./faculty/f_dash.php");
+            header("Location: ./faculty/f-dashboard.php");
             break;
         default:
             $_SESSION['status'] = "Role not recognized.";
